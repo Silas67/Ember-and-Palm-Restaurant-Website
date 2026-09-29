@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Ember & Palm Restaurant"
+description = "A polished restaurant website for Ember & Palm, a contemporary Nigerian dining room with menu browsing, online ordering, reservations, gallery, and contact details."
+version = "1.0.0"
+id = "artifacts/ember-palm"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25437
+
+[services.development]
+run = "pnpm --filter @workspace/ember-palm run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ember-palm", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/ember-palm/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25437"
+BASE_PATH = "/"
